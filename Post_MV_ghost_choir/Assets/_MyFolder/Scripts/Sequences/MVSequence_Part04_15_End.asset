@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af02387d4ec700b4e8f5c58b010c8474, type: 3}
+  m_Name: MVSequence_Part04_15_End
+  m_EditorClassIdentifier: 
+  IsPlayed: 0
+  _startNormalTime: 1
+  _changeCameraSetting: 0
+  _sequenceCameraSetting:
+    _cameraDistanceOffset: 1
+  _changeCharacterSetting: 1
+  _sequenceCharacterSettings: []
+  _tooltip: 
