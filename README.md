@@ -3,5 +3,5 @@
 
 ## Used Assets
  [DETAILED - Halloween Props Vol.1](https://assetstore.unity.com/packages/3d/environments/fantasy/detailed-halloween-props-vol-1-236945)  
- [Stylize Free Props & Trees - Erbeilo3D](https://assetstore.unity.com/packages/3d/environments/stylize-free-props-trees-erbeilo3d-237015#asset_quality)  
+ [Stylize Free Props & Trees - Erbeilo3D](https://assetstore.unity.com/packages/3d/environments/stylize-free-props-trees-erbeilo3d-237015)  
  [UnityYoutubePlayer](https://github.com/iBicha/UnityYoutubePlayer)  
