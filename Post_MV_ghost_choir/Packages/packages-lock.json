@@ -8,7 +8,7 @@
       "url": "https://packages.unity.com"
     },
     "com.guciodevs.simple-min-max-slider": {
-      "version": "https://github.com/GucioDevs/SimpleMinMaxSlider.git#upm",
+      "version": "https://github.com/augustdominik/SimpleMinMaxSlider.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},

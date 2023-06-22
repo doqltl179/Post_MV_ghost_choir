@@ -58,12 +58,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.25722528
+    - _Alpha: 0.001
     - _BodyAlpha: 0.001
     - _BodyJiggle: 0.069
-    - _BodyJiggleDistance: 0.022972694
-    - _BodyJiggleFrequency: 27.421211
-    - _BodyJiggleSpeed: 4.5717974
+    - _BodyJiggleDistance: 0.02834079
+    - _BodyJiggleFrequency: 27.871109
+    - _BodyJiggleSpeed: 4.824379
     - _BodyJiggleUVHeight: 0.8
     - _BodyVolumeCount: 9
     - _BodyVolumeGetDown: 0.035
