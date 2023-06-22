@@ -6,4 +6,11 @@
  [Stylize Free Props & Trees - Erbeilo3D](https://assetstore.unity.com/packages/3d/environments/stylize-free-props-trees-erbeilo3d-237015)  
  [Rocks FREE pack](https://assetstore.unity.com/packages/3d/props/exterior/rocks-free-pack-98219#content)  
  [UnityYoutubePlayer](https://github.com/iBicha/UnityYoutubePlayer)  
- [SimpleMinMaxSlider](https://github.com/augustdominik/SimpleMinMaxSlider)
+ [SimpleMinMaxSlider](https://github.com/augustdominik/SimpleMinMaxSlider)  
+
+## How to play
+ 1. Download project and open.
+ 2. Download all 'Used Assets' in project.
+ 3. Click the play button.
+    - If press spacebar, load video and preparing.
+    - If press spacebar one more, play MV.
