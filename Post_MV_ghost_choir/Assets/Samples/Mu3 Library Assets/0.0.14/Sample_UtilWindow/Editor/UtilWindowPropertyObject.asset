@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa522febc101a3648881bc4177f936c9, type: 3}
+  m_Name: UtilWindowPropertyObject
+  m_EditorClassIdentifier: 
+  foldout_debug: 1
+  foldout_sceneList: 1
+  sceneCheckDirectoryList:
+  - directory: Assets/_MyFolder/Scenes
+    scenePaths:
+    - Assets/_MyFolder/Scenes/CharactorTestScene.unity
+    - Assets/_MyFolder/Scenes/SampleScene.unity
+    foldout: 1
+  foldout_screenCapture: 1

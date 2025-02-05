@@ -686,7 +686,7 @@ public class MVManager : MonoBehaviour
         [Header("Materials")]
         [SerializeField] private Material mat_body;
         [SerializeField] private Material mat_eye;
-        [SerializeField] private Material mat_mouse;
+        [SerializeField] private Material mat_mouth;
         private const float AlphaMin = 0.001f;
         private const float AlphaMax = 0.325f;
         private float _materialAlpha = AlphaMin;
@@ -730,7 +730,7 @@ public class MVManager : MonoBehaviour
                 _materialAlpha = Mathf.Lerp(_materialAlpha, alphaValue, Time.deltaTime * 10f);
                 mat_body.SetFloat("_Alpha", _materialAlpha);
                 mat_eye.SetFloat("_Alpha", _materialAlpha);
-                mat_mouse.SetFloat("_Alpha", _materialAlpha);
+                mat_mouth.SetFloat("_Alpha", _materialAlpha);
 
 
 
@@ -753,7 +753,7 @@ public class MVManager : MonoBehaviour
 
             mat_body.SetFloat("_Alpha", AlphaMin);
             mat_eye.SetFloat("_Alpha", AlphaMin);
-            mat_mouse.SetFloat("_Alpha", AlphaMin);
+            mat_mouth.SetFloat("_Alpha", AlphaMin);
         }
 
         public void InitializeCharacterTransform()

@@ -60,8 +60,8 @@ public class CharacterGenerator : Generator, IIdle
     [Range(0f, 1f)] public float _eye_boring = 0f;
     private float _eye_boring_goal = 1f;
 
-    [Header("Mouse")]
-    [SerializeField] private MouseGenerator _mouse;
+    [Header("Mouth")]
+    [SerializeField] private MouthGenerator _mouth;
 
     private float _audioSampleValue = 0;
     public float AudioSampleValue
@@ -81,7 +81,7 @@ public class CharacterGenerator : Generator, IIdle
         {
             _audioSampleNormalValue = value;
 
-            _mouse.HeightNormal = _audioSampleNormalValue;
+            _mouth.HeightNormal = _audioSampleNormalValue;
         }
     }
 

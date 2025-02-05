@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IMouseAnimation
+public interface IMouthAnimation
 {
     void Init();
-    void MouseAnimation();
+    void MouthAnimation();
 }

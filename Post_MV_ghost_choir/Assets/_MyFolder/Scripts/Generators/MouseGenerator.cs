@@ -5,19 +5,19 @@ using System.Linq;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class MouseGenerator : Generator, IMouseAnimation
+public class MouthGenerator : Generator, IMouthAnimation
 {
     private MeshRenderer _meshRenderer;
     private MeshFilter _meshFilter;
 
     [Header("Mesh Ingredient")]
-    public Material mat_mouse;
+    public Material mat_mouth;
     private const float AlphaMin = 0.001f;
     private const float AlphaMax = 0.435f;
 
     [Header("Mesh Properties")]
-    [Range(3, 73)] public int _mouseQuality = 3;
-    [Range(0, 37)] public int _mouseFaceQuality = 3;
+    [Range(3, 73)] public int _mouthQuality = 3;
+    [Range(0, 37)] public int _mouthFaceQuality = 3;
     [Range(0, 10)] public int _thicknessQuality = 1;
     [Range(0.1f, 1f)] public float _thickness = 0.1f;
     private Vector3[] _vertices;
@@ -28,8 +28,8 @@ public class MouseGenerator : Generator, IMouseAnimation
     private Vector3[] _blendVerticesSum;
 
     #region For Editor
-    private int _mouseQualitySaver = -1;
-    private int _mouseFaceQualitySaver = -1;
+    private int _mouthQualitySaver = -1;
+    private int _mouthFaceQualitySaver = -1;
     private int _thicknessQualitySaver = -1;
     private float _thicknessSaver = -1f;
     #endregion
@@ -41,11 +41,11 @@ public class MouseGenerator : Generator, IMouseAnimation
 
     private void FixedUpdate()
     {
-        MouseAnimation();
+        MouthAnimation();
     }
 
     #region Interface
-    [Header("Mouse Animation Properties")]
+    [Header("Mouth Animation Properties")]
     [HideInInspector] public float HeightNormal = 0;
     private const float ScaleMin = 0.05f;
     private const float ScaleMax = 0.5f;
@@ -55,12 +55,12 @@ public class MouseGenerator : Generator, IMouseAnimation
         HeightNormal = 0;
     }
 
-    private Vector3 _mouseScale;
-    public void MouseAnimation()
+    private Vector3 _mouthScale;
+    public void MouthAnimation()
     {
-        _mouseScale = transform.localScale;
-        _mouseScale.y = Mathf.Lerp(ScaleMin, ScaleMax, HeightNormal);
-        transform.localScale = _mouseScale;
+        _mouthScale = transform.localScale;
+        _mouthScale.y = Mathf.Lerp(ScaleMin, ScaleMax, HeightNormal);
+        transform.localScale = _mouthScale;
     }
     #endregion
 
@@ -69,20 +69,20 @@ public class MouseGenerator : Generator, IMouseAnimation
 
     private void Update()
     {
-        if (_mouseQuality != _mouseQualitySaver)
+        if (_mouthQuality != _mouthQualitySaver)
         {
             Create();
 
-            _mouseQualitySaver = _mouseQuality;
+            _mouthQualitySaver = _mouthQuality;
 
             isPropertyChanged = true;
         }
 
-        if(_mouseFaceQuality != _mouseFaceQualitySaver)
+        if(_mouthFaceQuality != _mouthFaceQualitySaver)
         {
             Create();
 
-            _mouseFaceQualitySaver = _mouseFaceQuality;
+            _mouthFaceQualitySaver = _mouthFaceQuality;
 
             isPropertyChanged = true;
         }
@@ -149,7 +149,7 @@ public class MouseGenerator : Generator, IMouseAnimation
     #region Override
     public override void Create()
     {
-        GetVerticesAndTriangles(_mouseQuality, _mouseFaceQuality, _thicknessQuality, _thickness, out _vertices, out _triangles);
+        GetVerticesAndTriangles(_mouthQuality, _mouthFaceQuality, _thicknessQuality, _thickness, out _vertices, out _triangles);
 
         #region Set mesh
         Mesh mesh = new Mesh();
@@ -181,11 +181,11 @@ public class MouseGenerator : Generator, IMouseAnimation
                 _meshRenderer.receiveShadows = false;
             }
         }
-        if (mat_mouse == null)
+        if (mat_mouth == null)
         {
-            mat_mouse = new Material(Shader.Find("Standard"));
+            mat_mouth = new Material(Shader.Find("Standard"));
         }
-        _meshRenderer.material = mat_mouse;
+        _meshRenderer.material = mat_mouth;
 
         _mesh = mesh;
         #endregion
@@ -218,7 +218,7 @@ public class MouseGenerator : Generator, IMouseAnimation
     }
     #endregion
 
-    private void GetVerticesAndTriangles(int mouseQuality, int mouseFaceQuality, int thicknessQuality, float thickness, out Vector3[] vertices, out int[] triangles)
+    private void GetVerticesAndTriangles(int mouthQuality, int mouthFaceQuality, int thicknessQuality, float thickness, out Vector3[] vertices, out int[] triangles)
     {
         #region Common Properties
         float angle;
@@ -226,32 +226,32 @@ public class MouseGenerator : Generator, IMouseAnimation
         #endregion
 
         #region Front
-        Vector3[] frontVerts = new Vector3[mouseQuality + mouseQuality * mouseFaceQuality + 1];
+        Vector3[] frontVerts = new Vector3[mouthQuality + mouthQuality * mouthFaceQuality + 1];
         float frontZ = thickness * 0.5f;
         frontVerts[0] = new Vector3(0, 0, frontZ);
 
         int[] frontTris;
 
-        if (mouseFaceQuality > 0)
+        if (mouthFaceQuality > 0)
         {
             float offset;
             int vertIndex = 1;
-            for (int j = 0; j <= mouseFaceQuality; j++)
+            for (int j = 0; j <= mouthFaceQuality; j++)
             {
-                offset = 1f / (mouseFaceQuality + 1) * (j + 1);
-                for (int i = 0; i < mouseQuality; i++)
+                offset = 1f / (mouthFaceQuality + 1) * (j + 1);
+                for (int i = 0; i < mouthQuality; i++)
                 {
-                    angle = i / (float)mouseQuality * Mathf.PI * 2;
+                    angle = i / (float)mouthQuality * Mathf.PI * 2;
                     frontVerts[vertIndex] = new Vector3(Mathf.Cos(angle) * offset, Mathf.Sin(angle) * offset, frontZ);
 
                     vertIndex++;
                 }
             }
 
-            frontTris = new int[mouseQuality * 3 + (mouseQuality * mouseFaceQuality * 2 * 3)];
+            frontTris = new int[mouthQuality * 3 + (mouthQuality * mouthFaceQuality * 2 * 3)];
             triIndex = 0;
             vertIndex = 1;
-            for (; vertIndex < mouseQuality; vertIndex++)
+            for (; vertIndex < mouthQuality; vertIndex++)
             {
                 frontTris[triIndex + 0] = 0;
                 frontTris[triIndex + 1] = vertIndex;
@@ -261,23 +261,23 @@ public class MouseGenerator : Generator, IMouseAnimation
             }
             {
                 frontTris[triIndex + 0] = 0;
-                frontTris[triIndex + 1] = mouseQuality;
+                frontTris[triIndex + 1] = mouthQuality;
                 frontTris[triIndex + 2] = 1;
 
                 triIndex += 3;
             }
 
             vertIndex = 1;
-            for (int j = 0; j < mouseFaceQuality; j++)
+            for (int j = 0; j < mouthFaceQuality; j++)
             {
-                for (int i = 0; i < mouseQuality - 1; i++)
+                for (int i = 0; i < mouthQuality - 1; i++)
                 {
                     frontTris[triIndex + 0] = vertIndex;
-                    frontTris[triIndex + 1] = vertIndex + mouseQuality;
-                    frontTris[triIndex + 2] = vertIndex + mouseQuality + 1;
+                    frontTris[triIndex + 1] = vertIndex + mouthQuality;
+                    frontTris[triIndex + 2] = vertIndex + mouthQuality + 1;
 
                     frontTris[triIndex + 3] = vertIndex;
-                    frontTris[triIndex + 4] = vertIndex + mouseQuality + 1;
+                    frontTris[triIndex + 4] = vertIndex + mouthQuality + 1;
                     frontTris[triIndex + 5] = vertIndex + 1;
 
                     vertIndex++;
@@ -285,12 +285,12 @@ public class MouseGenerator : Generator, IMouseAnimation
                 }
                 {
                     frontTris[triIndex + 0] = vertIndex;
-                    frontTris[triIndex + 1] = vertIndex + mouseQuality;
+                    frontTris[triIndex + 1] = vertIndex + mouthQuality;
                     frontTris[triIndex + 2] = vertIndex + 1;
 
                     frontTris[triIndex + 3] = vertIndex;
                     frontTris[triIndex + 4] = vertIndex + 1;
-                    frontTris[triIndex + 5] = vertIndex - mouseQuality + 1;
+                    frontTris[triIndex + 5] = vertIndex - mouthQuality + 1;
 
                     vertIndex++;
                     triIndex += 6;
@@ -301,13 +301,13 @@ public class MouseGenerator : Generator, IMouseAnimation
         {
             for (int i = 1; i < frontVerts.Length; i++)
             {
-                angle = (i - 1) / (float)mouseQuality * Mathf.PI * 2;
+                angle = (i - 1) / (float)mouthQuality * Mathf.PI * 2;
                 frontVerts[i] = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), frontZ);
             }
 
-            frontTris = new int[mouseQuality * 3];
+            frontTris = new int[mouthQuality * 3];
             triIndex = 0;
-            for (int i = 1; i < mouseQuality; i++)
+            for (int i = 1; i < mouthQuality; i++)
             {
                 frontTris[triIndex + 0] = 0;
                 frontTris[triIndex + 1] = i;
@@ -317,39 +317,39 @@ public class MouseGenerator : Generator, IMouseAnimation
             }
             {
                 frontTris[triIndex + 0] = 0;
-                frontTris[triIndex + 1] = mouseQuality;
+                frontTris[triIndex + 1] = mouthQuality;
                 frontTris[triIndex + 2] = 1;
             }
         }
         #endregion
 
         #region Back
-        Vector3[] backVerts = new Vector3[mouseQuality + mouseQuality * mouseFaceQuality + 1];
+        Vector3[] backVerts = new Vector3[mouthQuality + mouthQuality * mouthFaceQuality + 1];
         float backZ = thickness * -0.5f;
         backVerts[0] = new Vector3(0, 0, backZ);
 
         int[] backTris;
 
-        if (mouseFaceQuality > 0)
+        if (mouthFaceQuality > 0)
         {
             float offset;
             int vertIndex = 1;
-            for (int j = 0; j <= mouseFaceQuality; j++)
+            for (int j = 0; j <= mouthFaceQuality; j++)
             {
-                offset = 1f / (mouseFaceQuality + 1) * (j + 1);
-                for (int i = 0; i < mouseQuality; i++)
+                offset = 1f / (mouthFaceQuality + 1) * (j + 1);
+                for (int i = 0; i < mouthQuality; i++)
                 {
-                    angle = i / (float)mouseQuality * Mathf.PI * 2;
+                    angle = i / (float)mouthQuality * Mathf.PI * 2;
                     backVerts[vertIndex] = new Vector3(Mathf.Cos(angle) * offset, Mathf.Sin(angle) * offset, backZ);
 
                     vertIndex++;
                 }
             }
 
-            backTris = new int[mouseQuality * 3 + (mouseQuality * mouseFaceQuality * 2 * 3)];
+            backTris = new int[mouthQuality * 3 + (mouthQuality * mouthFaceQuality * 2 * 3)];
             triIndex = 0;
             vertIndex = 1;
-            for (; vertIndex < mouseQuality; vertIndex++)
+            for (; vertIndex < mouthQuality; vertIndex++)
             {
                 backTris[triIndex + 0] = 0;
                 backTris[triIndex + 1] = vertIndex + 1;
@@ -360,23 +360,23 @@ public class MouseGenerator : Generator, IMouseAnimation
             {
                 backTris[triIndex + 0] = 0;
                 backTris[triIndex + 1] = 1;
-                backTris[triIndex + 2] = mouseQuality;
+                backTris[triIndex + 2] = mouthQuality;
 
                 triIndex += 3;
             }
 
             vertIndex = 1;
-            for (int j = 0; j < mouseFaceQuality; j++)
+            for (int j = 0; j < mouthFaceQuality; j++)
             {
-                for (int i = 0; i < mouseQuality - 1; i++)
+                for (int i = 0; i < mouthQuality - 1; i++)
                 {
                     backTris[triIndex + 0] = vertIndex;
-                    backTris[triIndex + 1] = vertIndex + mouseQuality + 1;
-                    backTris[triIndex + 2] = vertIndex + mouseQuality;
+                    backTris[triIndex + 1] = vertIndex + mouthQuality + 1;
+                    backTris[triIndex + 2] = vertIndex + mouthQuality;
                     
                     backTris[triIndex + 3] = vertIndex;
                     backTris[triIndex + 4] = vertIndex + 1;
-                    backTris[triIndex + 5] = vertIndex + mouseQuality + 1;
+                    backTris[triIndex + 5] = vertIndex + mouthQuality + 1;
 
                     vertIndex++;
                     triIndex += 6;
@@ -384,10 +384,10 @@ public class MouseGenerator : Generator, IMouseAnimation
                 {
                     backTris[triIndex + 0] = vertIndex;
                     backTris[triIndex + 1] = vertIndex + 1;
-                    backTris[triIndex + 2] = vertIndex + mouseQuality;
+                    backTris[triIndex + 2] = vertIndex + mouthQuality;
                     
                     backTris[triIndex + 3] = vertIndex;
-                    backTris[triIndex + 4] = vertIndex - mouseQuality + 1;
+                    backTris[triIndex + 4] = vertIndex - mouthQuality + 1;
                     backTris[triIndex + 5] = vertIndex + 1;
 
                     vertIndex++;
@@ -399,13 +399,13 @@ public class MouseGenerator : Generator, IMouseAnimation
         {
             for (int i = 1; i < backVerts.Length; i++)
             {
-                angle = (i - 1) / (float)mouseQuality * Mathf.PI * 2;
+                angle = (i - 1) / (float)mouthQuality * Mathf.PI * 2;
                 backVerts[i] = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), backZ);
             }
 
-            backTris = new int[mouseQuality * 3];
+            backTris = new int[mouthQuality * 3];
             triIndex = 0;
-            for (int i = 1; i < mouseQuality; i++)
+            for (int i = 1; i < mouthQuality; i++)
             {
                 backTris[triIndex + 0] = 0;
                 backTris[triIndex + 1] = i + 1;
@@ -416,7 +416,7 @@ public class MouseGenerator : Generator, IMouseAnimation
             {
                 backTris[triIndex + 0] = 0;
                 backTris[triIndex + 1] = 1;
-                backTris[triIndex + 2] = mouseQuality;
+                backTris[triIndex + 2] = mouthQuality;
             }
         }
         #endregion
@@ -428,51 +428,51 @@ public class MouseGenerator : Generator, IMouseAnimation
 
         if (thicknessQuality > 0)
         {
-            Vector3[] thickVerts = new Vector3[mouseQuality * thicknessQuality];
+            Vector3[] thickVerts = new Vector3[mouthQuality * thicknessQuality];
             float middleZ;
             int vertIndex = 0;
             for (int i = 0; i < thicknessQuality; i++)
             {
                 middleZ = Mathf.Lerp(frontZ, backZ, (i + 1) / (float)(thicknessQuality + 1));
-                for (int j = 0; j < mouseQuality; j++)
+                for (int j = 0; j < mouthQuality; j++)
                 {
-                    angle = j / (float)mouseQuality * Mathf.PI * 2;
+                    angle = j / (float)mouthQuality * Mathf.PI * 2;
                     thickVerts[vertIndex] = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), middleZ);
 
                     vertIndex++;
                 }
             }
 
-            middleVerts = new Vector3[mouseQuality + thickVerts.Length + mouseQuality];
-            Array.Copy(frontVerts, mouseQuality * mouseFaceQuality + 1, middleVerts, 0, mouseQuality);
-            Array.Copy(thickVerts, 0, middleVerts, mouseQuality, thickVerts.Length);
-            Array.Copy(backVerts, mouseQuality * mouseFaceQuality + 1, middleVerts, mouseQuality + thickVerts.Length, mouseQuality);
+            middleVerts = new Vector3[mouthQuality + thickVerts.Length + mouthQuality];
+            Array.Copy(frontVerts, mouthQuality * mouthFaceQuality + 1, middleVerts, 0, mouthQuality);
+            Array.Copy(thickVerts, 0, middleVerts, mouthQuality, thickVerts.Length);
+            Array.Copy(backVerts, mouthQuality * mouthFaceQuality + 1, middleVerts, mouthQuality + thickVerts.Length, mouthQuality);
 
-            middleTris = new int[(thicknessQuality + 1) * mouseQuality * 2 * 3];
+            middleTris = new int[(thicknessQuality + 1) * mouthQuality * 2 * 3];
             triIndex = 0;
             int offset;
             for (int j = 0; j < thicknessQuality + 1; j++)
             {
-                offset = mouseQuality * j;
-                for (int i = 0; i < mouseQuality - 1; i++)
+                offset = mouthQuality * j;
+                for (int i = 0; i < mouthQuality - 1; i++)
                 {
                     middleTris[triIndex + 0] = i + offset;
-                    middleTris[triIndex + 1] = i + mouseQuality + offset;
-                    middleTris[triIndex + 2] = i + mouseQuality + 1 + offset;
+                    middleTris[triIndex + 1] = i + mouthQuality + offset;
+                    middleTris[triIndex + 2] = i + mouthQuality + 1 + offset;
 
                     middleTris[triIndex + 3] = i + offset;
-                    middleTris[triIndex + 4] = i + mouseQuality + 1 + offset;
+                    middleTris[triIndex + 4] = i + mouthQuality + 1 + offset;
                     middleTris[triIndex + 5] = i + 1 + offset;
 
                     triIndex += 6;
                 }
                 {
-                    middleTris[triIndex + 0] = mouseQuality - 1 + offset;
-                    middleTris[triIndex + 1] = mouseQuality - 1 + mouseQuality + offset;
-                    middleTris[triIndex + 2] = mouseQuality + offset;
+                    middleTris[triIndex + 0] = mouthQuality - 1 + offset;
+                    middleTris[triIndex + 1] = mouthQuality - 1 + mouthQuality + offset;
+                    middleTris[triIndex + 2] = mouthQuality + offset;
 
-                    middleTris[triIndex + 3] = mouseQuality - 1 + offset;
-                    middleTris[triIndex + 4] = mouseQuality + offset;
+                    middleTris[triIndex + 3] = mouthQuality - 1 + offset;
+                    middleTris[triIndex + 4] = mouthQuality + offset;
                     middleTris[triIndex + 5] = 0 + offset;
 
                     triIndex += 6;
@@ -481,31 +481,31 @@ public class MouseGenerator : Generator, IMouseAnimation
         }
         else
         {
-            middleVerts = new Vector3[mouseQuality + mouseQuality];
-            Array.Copy(frontVerts, mouseQuality * mouseFaceQuality + 1, middleVerts, 0, mouseQuality);
-            Array.Copy(backVerts, mouseQuality * mouseFaceQuality + 1, middleVerts, mouseQuality, mouseQuality);
+            middleVerts = new Vector3[mouthQuality + mouthQuality];
+            Array.Copy(frontVerts, mouthQuality * mouthFaceQuality + 1, middleVerts, 0, mouthQuality);
+            Array.Copy(backVerts, mouthQuality * mouthFaceQuality + 1, middleVerts, mouthQuality, mouthQuality);
 
-            middleTris = new int[mouseQuality * 2 * 3];
+            middleTris = new int[mouthQuality * 2 * 3];
             triIndex = 0;
-            for (int i = 0; i < mouseQuality - 1; i++)
+            for (int i = 0; i < mouthQuality - 1; i++)
             {
                 middleTris[triIndex + 0] = i;
-                middleTris[triIndex + 1] = i + mouseQuality;
-                middleTris[triIndex + 2] = i + mouseQuality + 1;
+                middleTris[triIndex + 1] = i + mouthQuality;
+                middleTris[triIndex + 2] = i + mouthQuality + 1;
 
                 middleTris[triIndex + 3] = i;
-                middleTris[triIndex + 4] = i + mouseQuality + 1;
+                middleTris[triIndex + 4] = i + mouthQuality + 1;
                 middleTris[triIndex + 5] = i + 1;
 
                 triIndex += 6;
             }
             {
-                middleTris[triIndex + 0] = mouseQuality - 1;
-                middleTris[triIndex + 1] = mouseQuality - 1 + mouseQuality;
-                middleTris[triIndex + 2] = mouseQuality;
+                middleTris[triIndex + 0] = mouthQuality - 1;
+                middleTris[triIndex + 1] = mouthQuality - 1 + mouthQuality;
+                middleTris[triIndex + 2] = mouthQuality;
 
-                middleTris[triIndex + 3] = mouseQuality - 1;
-                middleTris[triIndex + 4] = mouseQuality;
+                middleTris[triIndex + 3] = mouthQuality - 1;
+                middleTris[triIndex + 4] = mouthQuality;
                 middleTris[triIndex + 5] = 0;
             }
         }
