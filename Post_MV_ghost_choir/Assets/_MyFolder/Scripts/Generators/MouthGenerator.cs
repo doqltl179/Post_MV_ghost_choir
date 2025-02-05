@@ -65,7 +65,7 @@ public class MouthGenerator : Generator, IMouthAnimation
     #endregion
 
 #if UNITY_EDITOR
-    bool isPropertyChanged = false;
+    bool isPropertyChanged = false; 
 
     private void Update()
     {

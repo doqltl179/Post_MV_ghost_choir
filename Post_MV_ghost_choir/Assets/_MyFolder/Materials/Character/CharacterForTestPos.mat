@@ -61,9 +61,9 @@ Material:
     - _Alpha: 0.2636819
     - _BodyAlpha: 0.001
     - _BodyJiggle: 0.069
-    - _BodyJiggleDistance: 0.02836963
-    - _BodyJiggleFrequency: 26.73747
-    - _BodyJiggleSpeed: 5.2808437
+    - _BodyJiggleDistance: 0.022281494
+    - _BodyJiggleFrequency: 24.15409
+    - _BodyJiggleSpeed: 5.4099483
     - _BodyJiggleUVHeight: 0.8
     - _BodyVolumeCount: 9
     - _BodyVolumeGetDown: 0.035

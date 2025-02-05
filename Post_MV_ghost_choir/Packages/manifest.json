@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.doqltl179.mu3libraryassets": "https://github.com/doqltl179/Mu3Library_ForUnity.git?path=Assets/Mu3LibraryAssets",
     "com.guciodevs.simple-min-max-slider": "https://github.com/augustdominik/SimpleMinMaxSlider.git",
     "com.unity.collab-proxy": "1.17.7",
     "com.unity.feature.development": "1.0.1",

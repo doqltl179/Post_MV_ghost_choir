@@ -7,13 +7,6 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
-    "com.doqltl179.mu3libraryassets": {
-      "version": "https://github.com/doqltl179/Mu3Library_ForUnity.git?path=Assets/Mu3LibraryAssets",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "a8cdeb692f02635134eb9b125229c770a1b7b20f"
-    },
     "com.guciodevs.simple-min-max-slider": {
       "version": "https://github.com/augustdominik/SimpleMinMaxSlider.git",
       "depth": 0,
