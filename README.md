@@ -17,7 +17,7 @@
 
 ## How to play
 1. Download project and open.
-2. Download all 'Used Assets' in project.
+2. Open `SampleScene` in `Assets/_MyFolder/Scenes`.
 3. Click the play button.
    - If press spacebar, load video and preparing.
    - If press spacebar one more, play MV.
